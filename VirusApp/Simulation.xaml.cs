@@ -115,7 +115,6 @@ namespace VirusApp
                 };
                 Canvas.SetLeft(rectangleGreen, width * (0.3 + i) + 1);
                 Canvas.SetTop(rectangleGreen, 95 + 500 - rectangleRed.Height - rectangleGreen.Height);
-                rectangleGreen.ToolTip = ToolTipExample.ToolTip;
                 MainCanvas.Children.Add(rectangleGreen);
 
                 Cities.Children.Add(CityStackPanel);
@@ -353,9 +352,6 @@ namespace VirusApp
                     Mode = BindingMode.OneWay
                 };
                 //ImmuneCity.SetBinding(TextBlock.TextProperty, ImmuneBind);
-                rectanglePurple.ToolTip = ToolTipExample.ToolTip;
-                rectangleRed.ToolTip = ToolTipExample.ToolTip;
-                rectangleGreen.ToolTip = ToolTipExample.ToolTip;
                 var label2 = new Label
                 {
                     Width = 20
@@ -415,7 +411,6 @@ namespace VirusApp
                     };
                     Canvas.SetLeft(rectanglePurple, width * (0.3 + i));
                     Canvas.SetTop(rectanglePurple, 95);
-                    rectanglePurple.ToolTip = ToolTipExample.ToolTip;
                     MainCanvas.Children.Add(rectanglePurple);
 
                     Rectangle rectangleRed2 = new Rectangle
@@ -426,7 +421,6 @@ namespace VirusApp
                     };
                     Canvas.SetLeft(rectangleRed2, width * (0.3 + i) + 1);
                     Canvas.SetTop(rectangleRed2, 95 + 500 - rectangleRed2.Height);
-                    rectangleRed2.ToolTip = ToolTipExample.ToolTip;
                     MainCanvas.Children.Add(rectangleRed2);
 
                     Rectangle rectangleGreen2 = new Rectangle
@@ -437,7 +431,6 @@ namespace VirusApp
                     };
                     Canvas.SetLeft(rectangleGreen2, width * (0.3 + i) + 1);
                     Canvas.SetTop(rectangleGreen2, 95 + 500 - rectangleRed2.Height - rectangleGreen2.Height);
-                    rectangleGreen2.ToolTip = ToolTipExample.ToolTip;
                     MainCanvas.Children.Add(rectangleGreen2);
                 }
                 Month.Content = "(" + Months[Country.Month] + ")";

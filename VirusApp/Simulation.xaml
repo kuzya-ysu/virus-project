@@ -155,35 +155,6 @@
         <StackPanel x:Name="Cities" Orientation="Horizontal" Canvas.Left="7" Canvas.Top="630" Width="1260" Height="50">
         </StackPanel>
         <Line Stroke="#252061" X1="0" X2="5000" Y1="595" Y2="595"/>
-        <Rectangle x:Name="ToolTipExample">
-            <Rectangle.ToolTip>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <Rectangle Height="15" Width="25" Fill="#1ac8b6"/>
-                        <TextBlock Text=" С иммунитетом - " Style="{StaticResource TextBlockStyle}"/>
-                        <!--<TextBlock x:Name="ImmuneCity" Style="{StaticResource TextBlockStyle}"/>
-                        <TextBlock Text=" (+" Style="{StaticResource TextBlockStyle}"/>
-                        <TextBlock x:Name="NewImmuneCity" Style="{StaticResource TextBlockStyle}"/>
-                        <TextBlock Text=")" Style="{StaticResource TextBlockStyle}"/>-->
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <Rectangle Height="15" Width="25" Fill="#ff0036"/>
-                        <TextBlock Text=" Больные - " Style="{StaticResource TextBlockStyle}"/>
-                        <!--<TextBlock x:Name="IllCity" Style="{StaticResource TextBlockStyle}"/>
-                        <TextBlock Text=" (+" Style="{StaticResource TextBlockStyle}"/>
-                        <TextBlock x:Name="NewIllCity" Style="{StaticResource TextBlockStyle}"/>
-                        <TextBlock Text=")" Style="{StaticResource TextBlockStyle}"/>-->
-                    </StackPanel>
-                </Grid>
-            </Rectangle.ToolTip>
-        </Rectangle>
     </Canvas>
     
 </Window>
