@@ -1,0 +1,10 @@
+﻿<Application x:Class="VirusApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:VirusApp"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             StartupUri="Menu.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

@@ -1,0 +1,189 @@
+﻿<Window x:Class="VirusApp.Simulation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VirusApp"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Icon="Images/App_Icon.ico"
+        Title="Симуляция" Height="720" Width="1280" ResizeMode="NoResize">
+    <Window.Resources>
+        <FontFamily x:Key="OurFont">
+            pack://application:,,,/Fonts/#Gardens CM
+        </FontFamily>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#b8b4ed"/>
+            <Setter Property="BorderBrush" Value="#252061"/>
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+    </Window.Resources>
+    <Canvas Background="#e7e5ff" x:Name="MainCanvas">
+        <StackPanel Orientation="Horizontal" Canvas.Top="10" Width="1100" >
+            <Label x:Name="CountryName" Style="{StaticResource LabelStyle}" Content="Название страны"   FontSize="30"  />
+            <Label Width="10"/>
+            <Button x:Name="CountryInfo" Width="30" Height="30" FontSize="20">
+                <Button.ToolTip>
+                    <ToolTip Placement="Bottom">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock Text="Размер денежного фонда: " TextAlignment="Right" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock x:Name="FundInfo" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock x:Name="FundSign" Text=" (+" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock x:Name="NewFundInfo" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock Text=")" Style="{StaticResource TextBlockStyle}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1"  Orientation="Horizontal">
+                                <TextBlock Text="Стоимость прививки: " TextAlignment="Right" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBlock x:Name="CostInfo" Style="{StaticResource TextBlockStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </ToolTip>
+                </Button.ToolTip>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="Images/info.png" Stretch="Fill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Label Width="30"/>
+            <Label x:Name="DiseaseName" Content="Название болезни" Style="{StaticResource LabelStyle}"  />
+            <Label Width="30"/>
+            <Label Content="Неделя" Style="{StaticResource LabelStyle}"   />
+            <Label x:Name="Week" Style="{StaticResource LabelStyle}"/>
+            <Label x:Name="Month" Style="{StaticResource LabelStyle}" />
+        </StackPanel>
+        <Button x:Name="VaccinateButton"  Width="50" Height="50"  Canvas.Left="1013" Canvas.Top="7" Click="VaccinateButton_Click"  >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="Images/Vaccinate.png" Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.ToolTip>
+                <ToolTip Placement="Left">
+                    <TextBlock Text="Провести вакцинацию" FontFamily="{StaticResource OurFont}" Foreground="#252061" FontSize="20" />
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="SaveButton"  Width="50" Height="50"  Canvas.Left="1143" Canvas.Top="7" Click="SaveButton_Click"  >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="Images/Save.png" Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.ToolTip>
+                <ToolTip Placement="Left">
+                    <TextBlock Text="Сохранить" FontFamily="{StaticResource OurFont}" Foreground="#252061" FontSize="20" />
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="NextWeekButton" Width="50" Height="50" Canvas.Left="1078" Canvas.Top="7" Click="NextWeekButton_Click"  >
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="Images/NextWeek.png" Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.ToolTip>
+                <ToolTip Placement="Left">
+                    <TextBlock Text="Перейти на следующую неделю" FontFamily="{StaticResource OurFont}" Foreground="#252061" FontSize="20" />
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button x:Name="ExitButton"  Width="50" Height="50"  Canvas.Left="1208" Canvas.Top="7" Click="ExitButton_Click"  >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="Images/exit.png" Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.ToolTip>
+                <ToolTip Placement="Left">
+                    <TextBlock Text="Выйти" FontFamily="{StaticResource OurFont}" Foreground="#252061" FontSize="20" />
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <StackPanel x:Name="Cities" Orientation="Horizontal" Canvas.Left="7" Canvas.Top="630" Width="1260" Height="50">
+        </StackPanel>
+        <Line Stroke="#252061" X1="0" X2="5000" Y1="595" Y2="595"/>
+        <Rectangle x:Name="ToolTipExample">
+            <Rectangle.ToolTip>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Rectangle Height="15" Width="25" Fill="#1ac8b6"/>
+                        <TextBlock Text=" С иммунитетом - " Style="{StaticResource TextBlockStyle}"/>
+                        <!--<TextBlock x:Name="ImmuneCity" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text=" (+" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock x:Name="NewImmuneCity" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text=")" Style="{StaticResource TextBlockStyle}"/>-->
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Rectangle Height="15" Width="25" Fill="#ff0036"/>
+                        <TextBlock Text=" Больные - " Style="{StaticResource TextBlockStyle}"/>
+                        <!--<TextBlock x:Name="IllCity" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text=" (+" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock x:Name="NewIllCity" Style="{StaticResource TextBlockStyle}"/>
+                        <TextBlock Text=")" Style="{StaticResource TextBlockStyle}"/>-->
+                    </StackPanel>
+                </Grid>
+            </Rectangle.ToolTip>
+        </Rectangle>
+    </Canvas>
+    
+</Window>

@@ -1,0 +1,47 @@
+﻿<Window x:Class="VirusApp.CityEditing"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:VirusApp"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Icon="Images/App_Icon.ico"
+        Title="Город" Height="600" Width="500" ResizeMode="NoResize">
+    <Window.Resources>
+        <FontFamily x:Key="OurFont">
+            pack://application:,,,/Fonts/#Gardens CM
+        </FontFamily>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#b8b4ed"/>
+            <Setter Property="BorderBrush" Value="#252061"/>
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="FontSize" Value="23"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+    </Window.Resources>
+    <Canvas Background="#e7e5ff">
+        <Button Style="{StaticResource ButtonStyle}" x:Name="BackButton" Height="30" Width="75" HorizontalAlignment="Left" Content="Назад" FontSize="20" Click="BackButton_Click" />
+        <Label x:Name="Name" Style="{StaticResource LabelStyle}" Content="Название города" Canvas.Top="86" Canvas.Left="11"/>
+        <TextBox x:Name="NameInput"  Canvas.Top="89" Canvas.Right="20" Width="200" BorderBrush="#252061" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" Height="25" Canvas.Left="274" />
+        <Label x:Name="Total" Style="{StaticResource LabelStyle}" Content="Население города" Canvas.Top="126" Canvas.Left="11"/>
+        <TextBox x:Name="TotalInput" Canvas.Top="129" Canvas.Right="20"  Width="200" BorderBrush="#252061" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" Height="25" Canvas.Left="274" />
+        <Label x:Name="Ill" Style="{StaticResource LabelStyle}" Content="Количество больных" Canvas.Left="11" Canvas.Top="166" />
+        <TextBox x:Name="IllInput"  Canvas.Top="169" Canvas.Right="20" Width="200" BorderBrush="#252061" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" Height="25" Canvas.Left="274"/>
+        <Label x:Name="Immune" Style="{StaticResource LabelStyle}" Content="Количество привитых" Canvas.Top="206" Canvas.Left="11"/>
+        <TextBox x:Name="ImmuneInput"  Canvas.Top="209" Canvas.Right="20" Width="200" BorderBrush="#252061" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" Height="25" Canvas.Left="274"/>
+        <Label x:Name="Traffic" Style="{StaticResource LabelStyle}" Content="Насыщенность транспортного " Canvas.Top="246" Canvas.Left="11"/>
+        <xctk:IntegerUpDown x:Name="TrafficInput" Maximum="10" Minimum="1" Width="85" BorderBrush="#252061" Canvas.Right="20" Canvas.Top="244" Foreground="#252061" Text="0" FontFamily="{StaticResource OurFont}" FontSize="18" HorizontalContentAlignment="Right" Height="25" Canvas.Left="389" />
+        <Label x:Name="Traffic2" Style="{StaticResource LabelStyle}" Content="движения" Canvas.Top="271" Canvas.Left="11"/>
+        <Button Style="{StaticResource ButtonStyle}" x:Name="OkButton" Content="Подтвердить" Height="83" Width="271" Canvas.Left="110" Canvas.Top="438" Click="Confirm_Click" />
+    </Canvas>
+
+</Window>
+

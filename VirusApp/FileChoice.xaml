@@ -1,0 +1,68 @@
+﻿<Window x:Class="VirusApp.FileChoice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VirusApp"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="Images/App_Icon.ico"
+        Title="Продолжить" Height="600" Width="500">
+    <Window.Resources>
+        <FontFamily x:Key="OurFont">
+            pack://application:,,,/Fonts/#Gardens CM
+        </FontFamily>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#b8b4ed"/>
+            <Setter Property="BorderBrush" Value="#252061"/>
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+        <Style x:Key="Label2Style" TargetType="Label">
+            <Setter Property="Background" Value="#252061"/>
+            <Setter Property="Height" Value="1"/>
+        </Style>
+    </Window.Resources>
+    <Canvas Background="#e7e5ff">
+        <Button x:Name="BackButton" Height="30" Width="75" HorizontalAlignment="Left" Content="Назад" FontSize="20" Click="BackButton_Click" Style="{StaticResource ButtonStyle}"/>
+        <Label Height="1" Width="500" Canvas.Top="30" Background="#252061" />
+        <ScrollViewer Canvas.Top="31" Width="494" Height="541">
+            <StackPanel x:Name="ListOfFiles" Orientation="Vertical" >
+
+            </StackPanel>
+        </ScrollViewer>
+        <Button x:Name="LoadTemplate"   Width="60" Height="60" Visibility="Collapsed" >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="Images/Load.png" Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="DeleteTemplate"  Width="60" Height="60"  Visibility="Collapsed"  >
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="Images/Delete.png" Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Canvas>
+
+</Window>

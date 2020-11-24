@@ -1,0 +1,62 @@
+﻿<Window x:Class="VirusApp.CountrySettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:VirusApp"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" Icon="Images/App_Icon.ico"
+        Title="Страна" Height="600" Width="500" ResizeMode="NoResize">
+    <Window.Resources>
+        <FontFamily x:Key="OurFont">
+            pack://application:,,,/Fonts/#Gardens CM
+        </FontFamily>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#b8b4ed"/>
+            <Setter Property="BorderBrush" Value="#252061"/>
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource OurFont}"/>
+            <Setter Property="FontSize" Value="23"/>
+            <Setter Property="Foreground" Value="#252061"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+    </Window.Resources>
+    <Canvas Background="#e7e5ff">
+        <Label x:Name="CountryName" Style="{StaticResource LabelStyle}" Content="Название страны" Canvas.Top="78" Canvas.Left="11"/>
+        <TextBox x:Name="CountryNameInput"  Canvas.Top="81" Canvas.Right="20" Width="200" BorderBrush="#252061" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" Height="25" Canvas.Left="274" />
+        <Label x:Name="DiseaseName" Style="{StaticResource LabelStyle}" Content="Название заболевания" Canvas.Top="118" Canvas.Left="11"/>
+        <TextBox x:Name="DiseaseNameInput" Canvas.Top="121" Canvas.Right="20"  Width="200" BorderBrush="#252061" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" Height="25" Canvas.Left="274" />
+        <Label x:Name="Period" Style="{StaticResource LabelStyle}" Content="Период моделирования" Canvas.Left="11" Canvas.Top="158" />
+        <xctk:IntegerUpDown x:Name="PeriodInput" Value="6" Minimum="6" Maximum="24" Canvas.Right="20" BorderBrush="#252061" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" Canvas.Top="161" Height="25" Canvas.Left="433"/>
+        <Label x:Name="StartMonth" Style="{StaticResource LabelStyle}" Content="Месяц начала моделирования" Canvas.Top="198" Canvas.Left="11"/>
+        <ComboBox x:Name="MonthInput" Canvas.Right="20" Canvas.Top="201" Background="#b8b4ed" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" BorderBrush="#252061" Height="25" Width="110" Canvas.Left="364">
+            <TextBlock>Январь</TextBlock>
+            <TextBlock>Февраль</TextBlock>
+            <TextBlock>Март</TextBlock>
+            <TextBlock>Апрель</TextBlock>
+            <TextBlock>Май</TextBlock>
+            <TextBlock>Июнь</TextBlock>
+            <TextBlock>Июль</TextBlock>
+            <TextBlock>Август</TextBlock>
+            <TextBlock>Сентябрь</TextBlock>
+            <TextBlock>Октябрь</TextBlock>
+            <TextBlock>Ноябрь</TextBlock>
+            <TextBlock>Декабрь</TextBlock>
+        </ComboBox>
+        <Label x:Name="Money" Style="{StaticResource LabelStyle}" Content="Размер денежного фонда страны" Canvas.Top="238" Canvas.Left="11"/>
+        <TextBox x:Name="MoneyInput" Width="85" BorderBrush="#252061" Canvas.Right="20" Canvas.Top="241" Foreground="#252061" Text="0" FontFamily="{StaticResource OurFont}" FontSize="18" HorizontalContentAlignment="Right" Height="25" Canvas.Left="389" />
+        <Label x:Name="Vaccine" Style="{StaticResource LabelStyle}" Content="Стоимось одной прививки" Canvas.Top="278" Canvas.Left="11"/>
+        <TextBox x:Name="VaccineInput" Width="85" BorderBrush="#252061" Canvas.Right="20" Canvas.Top="281" Foreground="#252061" Text="0" FontFamily="{StaticResource OurFont}" FontSize="18" HorizontalContentAlignment="Right" Height="25" Canvas.Left="389"/>
+        <Label x:Name="CitiesCount" Style="{StaticResource LabelStyle}" Content="Количество городов" Canvas.Top="318" Canvas.Left="11"/>
+        <xctk:IntegerUpDown x:Name="CitiesCountInput" BorderBrush="#252061" Value="5" Minimum="5" Maximum="10" Foreground="#252061" FontFamily="{StaticResource OurFont}" FontSize="18" Canvas.Right="20" Canvas.Top="321" Height="25" Canvas.Left="433" />
+        <Button Style="{StaticResource ButtonStyle}" x:Name="OkButton" Content="Подтвердить" Height="83" Width="271" Canvas.Left="110" Canvas.Top="438" Click="OkButton_Click" />
+        <Button Style="{StaticResource ButtonStyle}" x:Name="BackButton" Height="30" FontSize="20" Width="75" Canvas.Left="0" Canvas.Top="0" Content="Назад" Click="BackButton_Click" />
+    </Canvas>
+
+</Window>
