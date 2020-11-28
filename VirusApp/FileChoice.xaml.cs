@@ -28,63 +28,76 @@ namespace VirusApp
         {
             InitializeComponent();
             list = (from a in Directory.GetFiles(Directory.GetCurrentDirectory().ToString(), "*.dat") select System.IO.Path.GetFileName(a)).ToList();
-
-            for (int i = 0; i < list.Count; i++)
+            if (list.Count == 0)
             {
-                var fileLine = new StackPanel
+                var noFiles = new Label
                 {
-                    Height = 70,
-                    Orientation = Orientation.Horizontal
-                };
-                var fileName = new Label
-                {
-                    Width = 300,
                     Style = this.Resources["LabelStyle"] as Style,
-                    Content = list[i].Substring(0, list[i].Length - 4),
-                    VerticalAlignment = VerticalAlignment.Center
+                    Content = "У вас нет сохранённых симуляций",
+                    Width = 494,
+                    HorizontalContentAlignment = HorizontalAlignment.Center
                 };
-                fileLine.Children.Add(fileName);
-                var EmptySpace = new Label
+                ListOfFiles.Children.Add(noFiles);
+            }
+            else
+            {
+                for (int i = 0; i < list.Count; i++)
                 {
-                    Width = 55
-                };
-                fileLine.Children.Add(EmptySpace);
-                string template = XamlWriter.Save(LoadTemplate.Template);
-                StringReader stringReader = new StringReader(template);
-                XmlReader xmlReader = XmlReader.Create(stringReader);
-                var okButton = new Button
-                {
-                    Name = "File" + i.ToString(),
-                    Height = 50,
-                    Width = 50,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Template = (ControlTemplate)XamlReader.Load(xmlReader)
-                };
-                okButton.Click += OkButton_Click;
-                fileLine.Children.Add(okButton);
+                    var fileLine = new StackPanel
+                    {
+                        Height = 70,
+                        Orientation = Orientation.Horizontal
+                    };
+                    var fileName = new Label
+                    {
+                        Width = 300,
+                        Style = this.Resources["LabelStyle"] as Style,
+                        Content = list[i].Substring(0, list[i].Length - 4),
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                    fileLine.Children.Add(fileName);
+                    var EmptySpace = new Label
+                    {
+                        Width = 55
+                    };
+                    fileLine.Children.Add(EmptySpace);
+                    string template = XamlWriter.Save(LoadTemplate.Template);
+                    StringReader stringReader = new StringReader(template);
+                    XmlReader xmlReader = XmlReader.Create(stringReader);
+                    var okButton = new Button
+                    {
+                        Name = "File" + i.ToString(),
+                        Height = 50,
+                        Width = 50,
+                        VerticalAlignment = VerticalAlignment.Center,
+                        Template = (ControlTemplate)XamlReader.Load(xmlReader)
+                    };
+                    okButton.Click += OkButton_Click;
+                    fileLine.Children.Add(okButton);
 
 
-                var EmptySpace2 = new Label
-                {
-                    Width = 10
-                };
-                fileLine.Children.Add(EmptySpace2);
-                string template2 = XamlWriter.Save(DeleteTemplate.Template);
-                StringReader stringReader2 = new StringReader(template2);
-                XmlReader xmlReader2 = XmlReader.Create(stringReader2);
-                var deleteButton = new Button
-                {
-                    Name = "File" + i.ToString(),
-                    Template= (ControlTemplate)XamlReader.Load(xmlReader2),
-                    Height = 50,
-                    Width = 50,
-                    VerticalAlignment = VerticalAlignment.Center
-                };
-                deleteButton.Click += DeleteButton_Click;
-                fileLine.Children.Add(deleteButton);
+                    var EmptySpace2 = new Label
+                    {
+                        Width = 10
+                    };
+                    fileLine.Children.Add(EmptySpace2);
+                    string template2 = XamlWriter.Save(DeleteTemplate.Template);
+                    StringReader stringReader2 = new StringReader(template2);
+                    XmlReader xmlReader2 = XmlReader.Create(stringReader2);
+                    var deleteButton = new Button
+                    {
+                        Name = "File" + i.ToString(),
+                        Template = (ControlTemplate)XamlReader.Load(xmlReader2),
+                        Height = 50,
+                        Width = 50,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+                    deleteButton.Click += DeleteButton_Click;
+                    fileLine.Children.Add(deleteButton);
 
-                ListOfFiles.Children.Add(fileLine);
-                
+                    ListOfFiles.Children.Add(fileLine);
+
+                }
             }
         }
 
