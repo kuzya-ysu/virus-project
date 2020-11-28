@@ -357,7 +357,11 @@ namespace VirusApp
                     Width = 20
                 };
                 CityStackPanel.Children.Add(label2);
-                
+            }
+            if (Country.Week == Country.Weeks)
+            {
+                NextWeekButton.Visibility = Visibility.Hidden;
+                VaccinateButton.Visibility = Visibility.Hidden;
             }
         }
 
@@ -375,7 +379,7 @@ namespace VirusApp
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             var exitConfirmation = new ExitConfirmation(Country, this);
-            exitConfirmation.Show();
+            exitConfirmation.ShowDialog();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -388,7 +392,7 @@ namespace VirusApp
         private void VaccinateButton_Click(object sender, RoutedEventArgs e)
         {
             var Vaccination = new Vaccination(Country, Changes);
-            Vaccination.Show();
+            Vaccination.ShowDialog();
         }
 
         private void NextWeekButton_Click(object sender, RoutedEventArgs e)

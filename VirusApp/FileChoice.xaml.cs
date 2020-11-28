@@ -45,15 +45,16 @@ namespace VirusApp
                 {
                     var fileLine = new StackPanel
                     {
-                        Height = 70,
+                        MinHeight = 70,
                         Orientation = Orientation.Horizontal
                     };
-                    var fileName = new Label
+                    var fileName = new TextBlock
                     {
                         Width = 300,
-                        Style = this.Resources["LabelStyle"] as Style,
-                        Content = list[i].Substring(0, list[i].Length - 4),
-                        VerticalAlignment = VerticalAlignment.Center
+                        Style = this.Resources["TextBlockStyle"] as Style,
+                        Text = list[i].Substring(0, list[i].Length - 4),
+                        VerticalAlignment = VerticalAlignment.Center,
+                        TextWrapping = TextWrapping.Wrap
                     };
                     fileLine.Children.Add(fileName);
                     var EmptySpace = new Label
