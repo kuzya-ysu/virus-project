@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 using ClassLibrary;
 
 namespace VirusApp
@@ -35,6 +36,8 @@ namespace VirusApp
         private void Confirm_Click(object sender, RoutedEventArgs e)
         {
             bool correct = true;
+            string pattern = @"^[a-zA-Zа-яА-ЯёЁ]+( ?-? ?[a-zA-Zа-яА-ЯёЁ]+)*$";
+            Regex regex = new Regex(pattern);
 
             if (String.IsNullOrEmpty(NameInput.Text))
             {
@@ -47,21 +50,26 @@ namespace VirusApp
                 TotalInput.Text = "0";
                 correct = false;
             }
-            else if (!int.TryParse(IllInput.Text, out int res2) || int.Parse(IllInput.Text) < 0) 
+            else if (!int.TryParse(IllInput.Text, out int res2) || int.Parse(IllInput.Text) < 0)
             {
                 MessageBox.Show("Количество больных должно быть целым неотрицательным числом");
                 IllInput.Text = "0";
                 correct = false;
             }
-            else if(!int.TryParse(ImmuneInput.Text, out int res3) || int.Parse(ImmuneInput.Text) < 0)
+            else if (!int.TryParse(ImmuneInput.Text, out int res3) || int.Parse(ImmuneInput.Text) < 0)
             {
                 MessageBox.Show("Количество привитых должно быть целым неотрицательным числом");
                 ImmuneInput.Text = "0";
                 correct = false;
             }
-            else if(int.Parse(IllInput.Text)+int.Parse(ImmuneInput.Text)>int.Parse(TotalInput.Text))
+            else if (int.Parse(IllInput.Text) + int.Parse(ImmuneInput.Text) > int.Parse(TotalInput.Text))
             {
                 MessageBox.Show("Количество больных + количество привитых не может быть больше общего населения");
+                correct = false;
+            }
+            else if (!regex.IsMatch(NameInput.Text.ToString()))
+            {
+                MessageBox.Show("Некорректное название города");
                 correct = false;
             }
             if (correct)

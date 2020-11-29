@@ -12,13 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 using ClassLibrary;
 
 namespace VirusApp
 {
     public partial class CountrySettings : Window
     {
-        Country country;
+        private Country country;
+
         public CountrySettings()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace VirusApp
             MoneyInput.Text = country.Fund.ToString();
             VaccineInput.Text = country.Cost.ToString();
             PeriodInput.Value = country.Months;
-            MonthInput.SelectedIndex = country.Month-1;
+            MonthInput.SelectedIndex = country.Month - 1;
             CitiesCountInput.Value = country.CitiesCount;
             CountryNameInput.Text = country.Name;
             DiseaseNameInput.Text = country.DiseaseName;
@@ -39,6 +41,10 @@ namespace VirusApp
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             bool correct = true;
+            string pattern = @"^[a-zA-Zа-яА-ЯёЁ]+( ?-? ?[a-zA-Zа-яА-ЯёЁ]+)*$";
+            string pattern2 = @"^[a-zA-Zа-яА-ЯёЁ0-9]+( ?-? ?[a-zA-Zа-яА-ЯёЁ0-9]+)*$";
+            Regex regex = new Regex(pattern);
+            Regex regex2 = new Regex(pattern2);
 
             if (string.IsNullOrEmpty(CountryNameInput.Text.ToString()) || string.IsNullOrEmpty(DiseaseNameInput.Text.ToString()))
             {
@@ -62,9 +68,18 @@ namespace VirusApp
                 VaccineInput.Text = "0";
                 correct = false;
             }
-            
-            
-            if (correct) 
+            else if (!regex.IsMatch(CountryNameInput.Text.ToString()))
+            {
+                MessageBox.Show("Некорректное название страны");
+                correct = false;
+            }
+            else if (!regex2.IsMatch(DiseaseNameInput.Text.ToString()))
+            {
+                MessageBox.Show("Некорректное название заболевания");
+                correct = false;
+            }
+
+            if (correct)
             {
                 country = new Country(CountryNameInput.Text, DiseaseNameInput.Text, (int)PeriodInput.Value, MonthInput.SelectedIndex, int.Parse(MoneyInput.Text), int.Parse(VaccineInput.Text), (int)CitiesCountInput.Value);
                 var city = new City("", new Population(0, 0, 0, country.Weeks), 1);
@@ -87,7 +102,6 @@ namespace VirusApp
 
         private void MonthInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
     }
 }
