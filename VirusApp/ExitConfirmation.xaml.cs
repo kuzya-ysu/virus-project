@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using ClassLibrary;
@@ -19,7 +7,7 @@ namespace VirusApp
 {
     public partial class ExitConfirmation : Window
     {
-        Country Country;
+        Country Country { get; set; }
         string fileName;
         Simulation simulation;
 
@@ -31,14 +19,14 @@ namespace VirusApp
             InitializeComponent();
         }
 
-        static void SaveAsBinaryFormat(object objGraph, string fileName)
+        static void SaveAsBinaryFormat(object simulation, string fileName)
         {
             BinaryFormatter binFormat = new BinaryFormatter();
 
             using (Stream fStream = new FileStream(fileName,
                   FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                binFormat.Serialize(fStream, objGraph);
+                binFormat.Serialize(fStream, simulation);
             }
         }
 

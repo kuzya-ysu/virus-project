@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Navigation;
 using System.Windows.Markup;
 using System.IO;
 using System.Xml;
@@ -22,7 +10,6 @@ namespace VirusApp
     public partial class CitiesSelection : Window
     {
         public Country Country { get; set; }
-        public City City { get; set; }
 
         public CitiesSelection(Country country)
         {
@@ -50,11 +37,13 @@ namespace VirusApp
                     CityName.Content = Country.Cities[i].Name;
                 CityName.Style = this.Resources["LabelStyle"] as Style;
                 SP.Children.Add(CityName);
+
                 var EmptySpace = new Label
                 {
                     Width = 100
                 };
                 SP.Children.Add(EmptySpace);
+
                 string template = XamlWriter.Save(EditButtonTemplate.Template);
                 StringReader stringReader = new StringReader(template);
                 XmlReader xmlReader = XmlReader.Create(stringReader);
@@ -67,7 +56,9 @@ namespace VirusApp
                 };
                 EditButton.Click += CityEdit_Click;
                 SP.Children.Add(EditButton);
+
                 Cities.Children.Add(SP);
+
                 if (i != Country.CitiesCount - 1)
                 {
                     var BlackSpace = new Label
@@ -77,7 +68,6 @@ namespace VirusApp
                     Cities.Children.Add(BlackSpace);
                 }
             }
-            
         }
 
         private void CityEdit_Click(object sender, RoutedEventArgs e)
@@ -87,7 +77,6 @@ namespace VirusApp
             var CityEdit = new CityEditing(Country, CityNumber);
             CityEdit.Show();
             Close();
-
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

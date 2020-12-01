@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ClassLibrary;
 
 namespace VirusApp
@@ -18,7 +7,6 @@ namespace VirusApp
     public partial class Vaccination : Window
     {
         public Country Country { get; set; }
-        public City City { get; set; }
         public int[] Changes;
 
         public Vaccination(Country country, int[] changes)
@@ -35,6 +23,7 @@ namespace VirusApp
                     Orientation = Orientation.Horizontal,
                     Height = 70
                 };
+
                 var CityName = new Label
                 {
                     Width = 260,
@@ -46,22 +35,24 @@ namespace VirusApp
                     CityName.Content = Country.Cities[i].Name;
                 CityName.Style = this.Resources["LabelStyle"] as Style;
                 SP.Children.Add(CityName);
+
                 var EmptySpace = new Label
                 {
                     Width = 70
                 };
                 SP.Children.Add(EmptySpace);
+
                 var Vaccinating = new Xceed.Wpf.Toolkit.IntegerUpDown
                 {
                     Style = this.Resources["UpDownStyle"] as Style,
                     Name = "City" + (i).ToString() + "Vaccinated",
-                    //Maximum = Country.Cities[i].People.Total - Country.Cities[i].People.Immune - Country.Cities[i].People.Ill,
                     Value = Changes[i]
-
                 };
                 Vaccinating.ValueChanged += Vaccinating_ValueChanged;
                 SP.Children.Add(Vaccinating);
+
                 Cities.Children.Add(SP);
+
                 if (i != Country.CitiesCount - 1)
                 {
                     var BlackSpace = new Label
@@ -85,8 +76,6 @@ namespace VirusApp
                 Fund.Content = Country.Fund;
             }
         }
-
-        
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {

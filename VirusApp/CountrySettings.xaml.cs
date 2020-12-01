@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using ClassLibrary;
 
@@ -19,7 +7,7 @@ namespace VirusApp
 {
     public partial class CountrySettings : Window
     {
-        private Country country;
+        private Country Country;
 
         public CountrySettings()
         {
@@ -41,10 +29,10 @@ namespace VirusApp
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
             bool correct = true;
-            string pattern = @"^[a-zA-Zа-яА-ЯёЁ]+( ?-? ?[a-zA-Zа-яА-ЯёЁ]+)*$";
-            string pattern2 = @"^[a-zA-Zа-яА-ЯёЁ0-9]+( ?-? ?[a-zA-Zа-яА-ЯёЁ0-9]+)*$";
-            Regex regex = new Regex(pattern);
-            Regex regex2 = new Regex(pattern2);
+            string namePattern = @"^[a-zA-Zа-яА-ЯёЁ]+( ?-? ?[a-zA-Zа-яА-ЯёЁ]+)*$";
+            string deseasePattern = @"^[a-zA-Zа-яА-ЯёЁ0-9]+( ?-? ?[a-zA-Zа-яА-ЯёЁ0-9]+)*$";
+            Regex nameRegex = new Regex(namePattern);
+            Regex deseaseRegex = new Regex(deseasePattern);
 
             if (string.IsNullOrEmpty(CountryNameInput.Text.ToString()) || string.IsNullOrEmpty(DiseaseNameInput.Text.ToString()))
             {
@@ -68,12 +56,12 @@ namespace VirusApp
                 VaccineInput.Text = "0";
                 correct = false;
             }
-            else if (!regex.IsMatch(CountryNameInput.Text.ToString()))
+            else if (!nameRegex.IsMatch(CountryNameInput.Text.ToString()))
             {
                 MessageBox.Show("Некорректное название страны");
                 correct = false;
             }
-            else if (!regex2.IsMatch(DiseaseNameInput.Text.ToString()))
+            else if (!deseaseRegex.IsMatch(DiseaseNameInput.Text.ToString()))
             {
                 MessageBox.Show("Некорректное название заболевания");
                 correct = false;
@@ -81,13 +69,12 @@ namespace VirusApp
 
             if (correct)
             {
-                country = new Country(CountryNameInput.Text, DiseaseNameInput.Text, (int)PeriodInput.Value, MonthInput.SelectedIndex, int.Parse(MoneyInput.Text), int.Parse(VaccineInput.Text), (int)CitiesCountInput.Value);
-                var city = new City("", new Population(0, 0, 0, country.Weeks), 1);
+                Country = new Country(CountryNameInput.Text, DiseaseNameInput.Text, (int)PeriodInput.Value, MonthInput.SelectedIndex, int.Parse(MoneyInput.Text), int.Parse(VaccineInput.Text), (int)CitiesCountInput.Value);
                 for (int i = 0; i < CitiesCountInput.Value; i++)
                 {
-                    country.Cities[i] = new City("", new Population(0, 0, 0, country.Weeks), 1);
+                    Country.Cities[i] = new City("", new Population(0, 0, 0, Country.Weeks), 1);
                 }
-                var CitiesWindow = new CitiesSelection(country);
+                var CitiesWindow = new CitiesSelection(Country);
                 CitiesWindow.Show();
                 Close();
             }
@@ -98,10 +85,6 @@ namespace VirusApp
             Menu menu = new Menu();
             menu.Show();
             Close();
-        }
-
-        private void MonthInput_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
         }
     }
 }

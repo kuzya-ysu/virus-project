@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Markup;
 using System.IO;
@@ -21,9 +15,8 @@ namespace VirusApp
 { 
     public partial class Simulation : Window
     {
-
         public Country Country { get; set; }
-        public Dictionary<int, string> Months { get; set; }
+        public Dictionary<int, string> months = new Dictionary<int, string> { { 0, "Январь" }, { 1, "Февраль" }, { 2, "Март" }, { 3, "Апрель" }, { 4, "Май" }, { 5, "Июнь" }, { 6, "Июль" }, { 7, "Август" }, { 8, "Сентябрь" }, { 9, "Октябрь" }, { 10, "Ноябрь" }, { 11, "Декабрь" } };
         public string fileName;
         public int[] Changes { get; set; }
         
@@ -73,9 +66,7 @@ namespace VirusApp
 
             Week.SetBinding(Label.ContentProperty, WeekBind);
 
-            Months = new Dictionary<int, string> { { 0, "Январь" }, { 1, "Февраль" }, { 2, "Март" }, { 3, "Апрель" }, { 4, "Май" }, { 5, "Июнь" }, { 6, "Июль" }, { 7, "Август" }, { 8, "Сентябрь" }, { 9, "Октябрь" }, { 10, "Ноябрь" }, { 11, "Декабрь" } };
-            
-            Month.Content = "(" + Months[Country.Month] + ")";
+            Month.Content = "(" + months[Country.Month] + ")";
             int width = 1260 / Country.CitiesCount;
             for (int i = 0; i < Country.CitiesCount; i++)
             {
@@ -84,7 +75,6 @@ namespace VirusApp
                     Width = width,
                     Orientation = Orientation.Horizontal
                 };
-
 
                 Rectangle rectanglePurple = new Rectangle
                 {
@@ -118,6 +108,7 @@ namespace VirusApp
                 MainCanvas.Children.Add(rectangleGreen);
 
                 Cities.Children.Add(CityStackPanel);
+
                 var CityName = new TextBlock
                 {
                     Width = width - 45,
@@ -129,12 +120,14 @@ namespace VirusApp
                     CityName.Text = Country.Cities[i].Name.Substring(0, 10) + "...";
                 else
                     CityName.Text = Country.Cities[i].Name;
+
                 var EmptySpace = new Label
                 {
                     Width = 5
                 };
                 CityStackPanel.Children.Add(CityName);
                 CityStackPanel.Children.Add(EmptySpace);
+
                 string template = XamlWriter.Save(CountryInfo.Template);
                 StringReader stringReader = new StringReader(template);
                 XmlReader xmlReader = XmlReader.Create(stringReader);
@@ -142,7 +135,8 @@ namespace VirusApp
                 {
                     Template = (ControlTemplate)XamlReader.Load(xmlReader),
                     Height = 20,
-                    Width = 20
+                    Width = 20,
+                    VerticalAlignment = VerticalAlignment.Top
                 };
 
                 var ToolTipContent = new Grid();
@@ -337,27 +331,21 @@ namespace VirusApp
                 row4.Children.Add(Traffic);
                 ToolTipContent.Children.Add(row4);
                 #endregion
-                var OurToolTip = new ToolTip
+                var InfToolTip = new ToolTip
                 {
                     Content = ToolTipContent,
                     Placement = System.Windows.Controls.Primitives.PlacementMode.Top
                 };
-                infButton.ToolTip = OurToolTip;
+                infButton.ToolTip = InfToolTip;
                 CityStackPanel.Children.Add(infButton);
-                infButton.VerticalAlignment = VerticalAlignment.Top;
-                Binding ImmuneBind = new Binding
-                {
-                    Source = Country.Cities[i].People,
-                    Path = new PropertyPath("Immune"),
-                    Mode = BindingMode.OneWay
-                };
-                //ImmuneCity.SetBinding(TextBlock.TextProperty, ImmuneBind);
+
                 var label2 = new Label
                 {
                     Width = 20
                 };
                 CityStackPanel.Children.Add(label2);
             }
+
             if (Country.Week == Country.Weeks)
             {
                 NextWeekButton.Visibility = Visibility.Hidden;
@@ -365,14 +353,14 @@ namespace VirusApp
             }
         }
 
-        static void SaveAsBinaryFormat(object objGraph, string fileName)
+        static void SaveAsBinaryFormat(object simulation, string fileName)
         {
             BinaryFormatter binFormat = new BinaryFormatter();
 
             using (Stream fStream = new FileStream(fileName,
                   FileMode.Create, FileAccess.Write, FileShare.None))
             {
-                binFormat.Serialize(fStream, objGraph);
+                binFormat.Serialize(fStream, simulation);
             }
         }
 
@@ -406,16 +394,16 @@ namespace VirusApp
                 {
                     Changes[i] = 0;
 
-                    Rectangle rectanglePurple = new Rectangle
+                    Rectangle rectanglePurple2 = new Rectangle
                     {
                         Width = width * 0.4,
                         Height = 500,
                         Fill = purpleBrush,
                         Stroke = darkBrush
                     };
-                    Canvas.SetLeft(rectanglePurple, width * (0.3 + i));
-                    Canvas.SetTop(rectanglePurple, 95);
-                    MainCanvas.Children.Add(rectanglePurple);
+                    Canvas.SetLeft(rectanglePurple2, width * (0.3 + i));
+                    Canvas.SetTop(rectanglePurple2, 95);
+                    MainCanvas.Children.Add(rectanglePurple2);
 
                     Rectangle rectangleRed2 = new Rectangle
                     {
@@ -437,7 +425,7 @@ namespace VirusApp
                     Canvas.SetTop(rectangleGreen2, 95 + 500 - rectangleRed2.Height - rectangleGreen2.Height);
                     MainCanvas.Children.Add(rectangleGreen2);
                 }
-                Month.Content = "(" + Months[Country.Month] + ")";
+                Month.Content = "(" + months[Country.Month] + ")";
                 if (Country.NewFund >= 0)
                     FundSign.Text = " (+";
                 else
